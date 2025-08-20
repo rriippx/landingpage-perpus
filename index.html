@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpustakaan Huda Assyifa</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* CSS Reset and Basic Setup */
+        :root {
+            --primary-color: #0da132; /* Dark Blue */
+            --secondary-color: #000000; /* Amber/Yellow */
+            --accent-color: #1b80d3; /* Lighter Blue */
+            --text-dark: #212121;
+            --text-light: #FFFFFF;
+            --bg-light: #F5F7FA;
+            --border-color: #E0E0E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            /* UPDATED: Full page background image */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(images/bg.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Section */
+        header {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            background-color: var(--text-light);
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-bar-info span {
+            margin-right: 20px;
+        }
+        
+        .top-bar-info i {
+            margin-right: 8px;
+            color: var(--secondary-color);
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        /* Kolom Media Sosial */
+        .social-media a {
+            margin-bottom: 15px;
+            color: var(--light-text);
+            font-size: 1rem; 
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+
+        .social-media a:hover {
+            color: var(--accent-color)
+        }
+       /* --- UPDATED STYLES FOR LOGO WITH TEXT --- */
+       .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-container img {
+            height: 50px;
+            width: auto;
+        }
+
+        .library-name {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .library-name strong {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .library-name span {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+        }
+        /* --- END OF UPDATED STYLES --- */
+
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            padding-bottom: 5px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        
+        /* --- Dropdown Menu Styles --- */
+        .nav-links li.dropdown {
+            position: relative;
+        }
+
+        .nav-links li.dropdown .dropdown-toggle i {
+            font-size: 12px;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 150%; /* Start further down */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            list-style: none;
+            padding: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, top 0.3s ease, visibility 0.3s ease;
+            z-index: 1100;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-dark);
+            /* REMOVED white-space: nowrap; to allow text to wrap */
+        }
+        .dropdown-menu li a:hover {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+        }
+        /* Remove parent link styles from dropdown links */
+        .dropdown-menu li a::after {
+            display: none;
+        }
+
+               /* Submenu Styles */
+               .submenu-parent {
+            position: relative;
+        }
+        .submenu-parent > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .submenu {
+            top: 0;
+            left: 100%;
+            transform: none;
+        }
+
+        @media (min-width: 993px) {
+            .nav-links li.dropdown:hover > .dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                top: 100%;
+            }
+            .nav-links li.dropdown:hover > .dropdown-toggle i {
+                transform: rotate(180deg);
+            }
+            .submenu-parent:hover > .submenu {
+                opacity: 1;
+                visibility: visible;
+                top: -10px; /* Adjust vertical alignment */
+            }
+        }
+
+        /* Show dropdown on hover (desktop) */
+        @media (min-width: 993px) {
+            .nav-links li.dropdown:hover > .dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                top: 100%;
+            }
+            .nav-links li.dropdown:hover > .dropdown-toggle i {
+                transform: rotate(180deg);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            color: var(--text-light);
+            padding: 100px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            overflow: hidden;
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            animation: hero-zoom 20s ease-in-out infinite alternate;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 2;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            border: none;
+            padding: 18px 25px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-bar button {
+            border: none;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 0 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .search-bar button i {
+            margin-right: 8px;
+        }
+
+        /* --- UPDATED: Info Section with Flip Effect --- */
+        .info-section {
+            padding: 80px 0;
+            perspective: 1000px; /* Add perspective for 3D effect */
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .info-card {
+            background-color: transparent; /* The card itself is a container */
+            height: 250px; /* Give a fixed height */
+            border: none;
+            box-shadow: none;
+            cursor: pointer;
+        }
+
+        .info-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        .info-card:hover .info-card-inner,
+        .info-card:focus .info-card-inner,
+        .info-card:active .info-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .info-card-front, .info-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .info-card-front {
+            background-color: #fff;
+            color: var(--text-dark);
+        }
+
+        .info-card-back {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            transform: rotateY(180deg);
+        }
+
+        .info-card .icon {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .info-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            font-size: 15px;
+            color: #666;
+        }
+        
+        .info-card-back h3 {
+            color: var(--text-light);
+        }
+        .info-card-back p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+/* --- Visi Misi Section Styles --- */
+        .visi-misi-section {
+            padding: 80px 0;
+            scroll-margin-top: 120px;
+        }
+        .visi-misi-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .visi-misi-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        .visi-misi-content p, .visi-misi-content ul {
+            color: #555;
+            line-height: 1.8;
+        }
+        .visi-misi-content ul {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+        .visi-misi-content li {
+            margin-bottom: 10px;
+        }
+
+/* --- NEW: History Section Styles --- */
+               .history-section {
+            padding: 80px 0;
+            scroll-margin-top: 120px;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .history-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .history-content .subtitle {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .history-content h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .history-content p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* News Section */
+        .news-section {
+            padding: 80px 0;
+            scroll-margin-top: 90px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-content h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .news-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .news-content a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .news-content a:hover {
+            text-decoration: underline;
+        }
+
+/* --- Announcement Banner Styles --- */
+               .banner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .banner-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .banner-content {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .banner-overlay.active .banner-content {
+            transform: scale(1);
+        }
+
+        .banner-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .banner-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .banner-content p {
+            margin-bottom: 25px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .banner-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .banner-link:hover {
+            background-color: var(--accent-color);
+        }
+    
+        /* main Footer */
+        .main-footer {
+            background-color: var(--primary-color); /* Menggunakan variabel CSS */
+            color: var(--text-light);
+            padding: 40px 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap; /* Memungkinkan item membungkus di layar kecil */
+            gap: 20px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 300px; /* Lebar minimum sebelum membungkus */
+            padding: 0 15px;
+        }
+
+        .footer-column h3 {
+            color: #ffffff;
+            border-bottom: 2px solid var(--primary-color); /* Menggunakan variabel CSS */
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        /* Kolom Peta */
+        .map-container {
+            overflow: hidden;
+            border-radius: 8px;
+            height: 200px; /* Tinggi peta */
+            border: 2px solid var(--primary-color); /* Menggunakan variabel CSS */
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Kolom Media Sosial */
+        .footer-social-media a {
+            display: block;
+            margin-bottom: 15px;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-media a:hover {
+            color: var(--accent-color)
+        }
+
+        /* Footer */
+        footer {
+            background-color: #212121;
+            color: var(--text-light);
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            font-size: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; /* Position below header */
+                left: 0;
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                padding: 10px 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                text-align: center;
+                padding: 15px 0;
+            }
+            
+            .nav-links a::after {
+                display: none; /* Hide underline on mobile */
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                font-size: 12px;
+            }
+            .top-bar .container {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .search-bar input {
+                border-radius: 10px 10px 0 0;
+                text-align: center;
+            }
+            
+            .search-bar button {
+                border-radius: 0 0 10px 10px;
+                padding: 15px;
+            }
+        }
+/* --- STYLES FOR TEAM SECTION --- */
+        .team-section {
+            padding: 80px 0;
+            scroll-margin-top: 120px;
+        }
+
+        .team-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .team-text-content .subtitle {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .team-text-content .title {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .team-text-content .description {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .team-text-content .btn-team {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 14px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .team-text-content .btn-team:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .team-image-grid {
+            position: relative;
+            height: 400px; /* Set a fixed height for the container */
+        }
+
+        .team-image-grid img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%; /* Make images circular */
+            border: 5px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            position: absolute;
+            transition: transform 0.2s ease-out;
+        }
+        
+        .team-image-grid img:hover {
+            transform: scale(1.1);
+            z-index: 2;
+        }
+
+        /* Positioning the images to replicate the design */
+        .team-image-grid .img-1 { top: 0; left: 50px; }
+        .team-image-grid .img-2 { bottom: -100px; right: 0; }
+        .team-image-grid .img-3 { top: 0; right: 0px; }
+        .team-image-grid .img-4 { bottom:-100px; left: 50px; }
+
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .team-wrapper {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .team-image-grid {
+                margin-top: 50px;
+                height: 350px; /* Adjust height for mobile */
+            }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 10px 0; }
+            .nav-links.active { display: flex; }
+            .nav-links li { text-align: center; padding: 15px 0; }
+            .nav-links a::after { display: none; }
+            .menu-toggle { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar .container { flex-direction: column; gap: 8px; }
+            .team-text-content .title { font-size: 32px; }
+        }
+
+        /* --- Announcement & Popup Modal Styles --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 980px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .modal-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .modal-content p {
+            margin-bottom: 25px;
+            font-size: 16px;
+            color: #555;
+            text-align: left;
+        }
+
+        .modal-content a.banner-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content a.banner-link:hover {
+            background-color: var(--accent-color);
+        }
+
+/* --- Team img --- */
+        .all-team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member-card {
+            text-align: center;
+        }
+
+        .team-member-card img {
+            width: 800px;
+            height: 500px;
+            border-radius: 0%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .team-member-card h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .team-member-card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+ /* --- UPDATED NEWS SECTION STYLES --- */
+ .news-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .news-carousel {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .news-grid {
+            display: flex;
+/* Added transition for smooth scrolling via JS */
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .news-card {
+            flex-shrink: 0;
+            width: 300px;
+            margin-right: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-content h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .news-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .news-content a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .news-content a:hover {
+            text-decoration: underline;
+        }
+/* --- END OF UPDATED NEWS STYLES --- */
+/* --- FAQ Chat Button & Window Styles --- */
+        .faq-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1050;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-fab:hover {
+            transform: scale(1.1);
+        }
+
+        .faq-chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            overflow: hidden;
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+
+        .faq-chat-window.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .chat-header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0.8;
+            line-height: 1;
+        }
+        .chat-close:hover {
+            opacity: 1;
+        }
+
+        .chat-body {
+            padding: 20px;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .chat-footer {
+            padding: 0 20px 20px 20px;
+        }
+
+        .wa-button {
+            display: block;
+            background-color: #25D366;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .wa-button:hover {
+            background-color: #291ebe;
+        }
+
+        .wa-button i {
+            margin-right: 10px;
+        }
+        @keyframes hero-zoom {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.15);
+            }
+        }
+        
+/* --- ADDED: Scroll Animation --- */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+/* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                padding: 10px 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                text-align: center;
+                padding: 15px 0;
+            }
+            
+            .nav-links a::after {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+                     /* --- Mobile Dropdown Styles --- */
+                     .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                border-radius: 0;
+                width: 100%;
+                background-color: var(--bg-light);
+                padding: 0;
+                transform: none;
+                opacity: 1;
+                visibility: visible;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease, padding 0.5s ease;
+            }
+
+            .dropdown.open .dropdown-menu {
+                max-height: 500px;
+                padding: 10px 0;
+            }
+
+            .dropdown.open .dropdown-toggle i {
+                transform: rotate(180deg);
+            }
+
+            .dropdown-menu li {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                font-size: 12px;
+            }
+            .top-bar .container {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .search-bar input {
+                border-radius: 10px 10px 0 0;
+                text-align: center;
+            }
+            
+            .search-bar button {
+                border-radius: 0 0 10px 10px;
+                padding: 15px;
+            }
+              
+/* Adjust FAQ for mobile */
+             .faq-chat-window {
+                width: calc(100% - 40px);
+                right: 20px;
+                bottom: 90px;
+            }
+            .faq-fab {
+                right: 20px;
+                bottom: 20px;
+            }
+        }
+               
+/* --- NEW: Stats Section Styles --- */
+        .stats-section {
+            padding: 60px 0;
+            background-color: ;
+            color: var(--secondary-color);
+            text-align: center;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .stats-card {
+            flex-basis: 200px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-card .icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .stats-card .stat-count {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stats-card .stat-label {
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <!-- Announcement Banner -->
+    <div id="announcement-banner" class="banner-overlay">
+        <div class="banner-content">
+            <button id="banner-close" class="banner-close-btn">&times;</button>
+            <h3>Pengumuman Penting</h3>
+            <p>Bagi lulusan 2025 yang ingin mengambil bebas pustaka dan yearbook bisa di ambil di perpustakaan.</p>
+            <a href="#" class="banner-link">Baca Selengkapnya</a>
+        </div>
+    </div>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-info">
+                    <span><i class="fas fa-phone"></i> 0293 - 369256</span>
+                    <span><i class="fas fa-envelope"></i> lib.hudaassyifa.mankotma@gmail.com</span>
+                </div>
+                <div class="social-media">
+                    <a href="https://web.facebook.com/profile.php?id=61562968593969" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/perpustakaanmankotamagelang?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/@perpustakaanhudaassyifa?si=fqmbhisdsd8_0Ta8" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <nav class="main-nav">
+                 <!-- --- UPDATED LOGO SECTION --- -->
+                 <a href="#" class="logo-container">
+                    <img src="images/logo.png" alt="Logo Perpustakaan">
+                    <div class="library-name">
+                        <strong>Perpustakaan Huda Assyifa</strong>
+                        <span>NPP: 3371011L1000001</span>
+                    </div>
+                </a>
+                <!-- --- END OF UPDATED LOGO SECTION --- -->
+             </a>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html" class="active">Beranda</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">Profil <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#visi-misi">Visi & Misi</a></li>
+                            <li><a href="#sejarah">Sejarah</a></li>
+                            <li><a href="#struktur">Struktur Organisasi</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Layanan<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-popup="Baca di Tempat">Baca di Tempat</a></li>
+                                <li class="submenu-parent">
+                                <a href="#">Sirkulasi<i class="fas fa-chevron-right"></i></a>
+                                <ul class="dropdown-menu submenu">
+                                    <li><a href="#" data-popup="Peminjaman & Pengembalian">Peminjaman & Pengembalian</a></li>
+                                    <li><a href="#" data-popup="Bebas Pustaka">Bebas Pustaka</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Referensi</a></li>
+                            <li><a href="#">Penelusuran Informasi</a></li>
+                            <li><a href="#">Penyedia Dokumen</a></li>
+                            <li><a href="#">Silang Layan</a></li>
+                            <li><a href="#">Ekstensi</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">Koleksi<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a target="_blank" href="https://perpus.mankotamagelang.sch.id/">Online Akses Katalog</a></li>
+                            <li><a href="#">E-Book</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">Anggota<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a target="_blank" href="https://forms.gle/yCLveXFhX7KNeJPP9">Daftar Anggota</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#berita">Informasi</a></li>
+                </ul>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-slideshow">
+                <div class="hero-slide active" style="background-image: url('images/baner1.jpeg');" onerror="this.style.backgroundImage='url(https://placehold.co/1920x1080/0D47A1/FFFFFF?text=Gambar+1)'"></div>
+                <div class="hero-slide" style="background-image: url('images/baner2.jpeg');"></div>
+                <div class="hero-slide" style="background-image: url('images/baner3.jpeg');"></div>
+            </div>
+            <div class="container">
+                <h1>Selamat Datang di</h1>
+                <h1 style="margin-top: -10px;">Perpustakaan Huda Assyifa</h1>
+                <h1 style="margin-top: -45px;">MAN Kota Magelang</h1>
+                <p>Cuma perlu satu buku untuk jatuh cinta pada membaca. Cari buku itu, mari jatuh cinta!~@NajwaShihab</p>
+                <div class="search-bar">
+                    <form action="https://perpus.mankotamagelang.sch.id/index.php" method="get" target="_blank">
+                        <!-- Tambahkan style untuk memperbesar tombol -->
+                        <button type="submit" style="padding: 20px; font-size: 16px; width: 700px;"><i class="fas fa-search"></i> Cari</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </section>
+
+<!-- NEW: Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-container">
+                    <div class="stats-card">
+                        <div class="icon"><i class="fas fa-book"></i></div>
+                        <div class="stat-count" data-target="15000">0</div>
+                        <div class="stat-label" style="color: #000000;">Total Judul</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="icon"><i class="fas fa-books"></i></div>
+                        <div class="stat-count" data-target="25000">0</div>
+                        <div class="stat-label"style="color: #000000;">Total Koleksi</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-count" data-target="8750">0</div>
+                        <div class="stat-label" style="color: #000000;">Total Peminjam</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-count" data-target="16250">0</div>
+                        <div class="stat-label" style="color: #000000;">Total Tersedia</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- UPDATED: Info Section with Flip Cards -->
+        <section class="info-section">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-card" tabindex="0">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <div class="icon"><i class="fas fa-clock"></i></div>
+                                <h3>Jam Buka Layanan</h3>
+                                <p>Sentuh untuk detail</p>
+                            </div>
+                            <div class="info-card-back">
+                                <h3>Jam Operasional</h3>
+                                <p style="font-size: 14px;">Senin-Kamis: 07.00-15.00</p>
+                                <p style="font-size: 14px;">Jumat: 07.00-11.30</p>
+                                <p style="font-size: 14px;">Sabtu: 07.00-15.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card" tabindex="0">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <div class="icon"><i class="fas fa-book-open"></i></div>
+                                <h3>Koleksi</h3>
+                                <p>Sentuh untuk detail</p>
+                            </div>
+                            <div class="info-card-back">
+                                <h3>Akses Digital</h3>
+                                <p>Ribuan koleksi tercetak dan ratusan koleksi digital yang dapat dipinjam.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card" tabindex="0">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <div class="icon"><i class="fas fa-user-graduate"></i></div>
+                                <h3>Bebas Pustaka</h3>
+                                <p>Sentuh untuk detail</p>
+                            </div>
+                            <div class="info-card-back">
+                                <h3>Bebas Pustaka</h3>
+                                <p>Layanan pengurusan surat bebas pustaka untuk syarat pengambilan ijazah.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card" tabindex="0">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <div class="icon"><i class="fas fa-globe"></i></div>
+                                <h3>Layanan Digital</h3>
+                                <p>Sentuh untuk detail</p>
+                            </div>
+                            <div class="info-card-back">
+                                <h3>Layanan Digital</h3>
+                                <p>Akses online public access catalog dan Ebook dimana dan kapan saja</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- Visi Misi Section -->
+        <section class="visi-misi-section scroll-animate" id="visi-misi">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Visi & Misi</h2>
+                </div>
+                <div class="visi-misi-content">
+                    <div class="visi">
+                        <h3>Visi</h3>
+                        <p>“Menjadikan Perpustakaan Tempat Menggali Potensi Diri Melalui Membaca dan Sarana Rekreasi”</p>
+                    </div>
+                    <div class="misi">
+                        <h3>Misi</h3>
+                        <ul>
+                            <li>Mewujudkan perpustakaan yang sejuk, nyaman dan menarik</li>
+                            <li>Menyediakan informasi yang up to date</li>
+                            <li>Menumbuhkan minat baca, mengembangkan ide dan kreatifitas.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+ <!-- NEW: History Section -->
+        <section class="history-section scroll-animate" id="sejarah">
+            <div class="container">
+                <div class="history-grid">
+                    <div class="history-image">
+                        <img src="images/sejarah.png" alt="Foto Sejarah Perpustakaan">
+                    </div>
+                    <div class="history-content">
+                        <h2 style="color: #1b80d3;">Sejarah Singkat Perpustakaan</h2>
+                        <p>Perpustakaan Huda Assyifa dirintis bersamaan dengan berdirinya MAN Kota Magelang. Berdasarkan Surat Keputusan Menteri Agama RI Nomor 137 tanggal 11 Juli 1991 Madrasah Aliyah Negeri Parakan Temanggung Filial di Kota madya Magelang menjadi Madrasah Aliyah Negeri ( MAN 1 ) Kota Magelang dan mulai tahun 1996 pindah di Jalan Raya Payaman Nomor 01
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+ <!-- profil -->
+    <main>
+        <section class="team-section scroll-animate" id="struktur">
+            <div class="container team-wrapper">
+                <div class="team-text-content">
+                    <h1 style="color: #1b80d3;">Tim Perpustakaan Kami</h1>
+                    <h1 class="title">Driven by Knowledge, Focused on Service</h1>
+                    <p class="description">
+                        Perpustakaan didukung oleh tim dan staf ahli di bidangnya. Dengan pengalaman dan prestasi di tingkat nasional, tim kami berkomitmen menyediakan layanan perpustakaan terbaik untuk mendukung kegiatan akademik, penelitian, dan pengembangan ilmu di lingkungan MAN Kota Magelang.
+                    </p>
+                    <a href="#" id="view-team-btn" class="btn-team">Struktur Organisasi</a>
+                </div>
+                <div class="team-image-grid">
+                    <img src="images/pus1.jpg" alt="Foto Pustakawan 1" class="img-1" >
+                    <img src="images/pus2.JPG" alt="Foto Pustakawan 2" class="img-2" >
+                    <img src="images/pus3.JPG" alt="Foto Pustakawan 3" class="img-3" >
+                    <img src="images/pus4.JPG" alt="Foto Pustakawan 4" class="img-4" >
+                </div>
+            </div>
+        </section>
+    </main>
+ <!-- profil -->
+        <!-- News Section -->
+        <section class="news-section scroll-animate" id="berita">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Berita & Pengumuman</h2>
+                    <p>Ikuti informasi dan kegiatan terbaru dari perpustakaan kami.</p>
+                </div>
+                <!-- Original 4 Cards -->
+                <div class="news-carousel">
+                <div class="news-grid">
+                    <div class="news-card">
+                        <img src="images/berita1.png" alt="Gambar Berita 1">
+                        <div class="news-content">
+                            <h3>literasi Sebagai Pondasi Peradaban</h3>
+                            <p>Selasa, 17 Juni 2025] Perpustakaan Huda Assyifa MAN Kota Magelang melaksanakan kegiatan seminar pegiat literasi bersama komunitas Gabut (Give & be useful to us) Indonesia.</p>
+                            <a href="https://www.instagram.com/reel/DLBgVp5BMLY/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank">Baca Selengkapnya &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="images/berita2.png" alt="Gambar Berita 2">
+                        <div class="news-content">
+                            <h3>Hidroponik Madrasah</h3>
+                            <p>Menanam dengan cinta, memanen dengan bahagia. MAN Kota Magelang punya area tanam HIdroponik loh! hal ini tidak hanya mengedukasi masyarakat madrasah tapi juga sebagai upaya mensukseskan program adiwiyata Madrasah</p>
+                            <a href="https://www.instagram.com/p/DJ6qZJWzupB/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Baca Selengkapnya  &rarr; </a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="images/berita3.png" alt="Gambar Berita 3">
+                        <div class="news-content">
+                            <h3>Pojok Baca Perpustakaan?!</h3>
+                            <p>Bosen belajar atau ngerjain tugas di dalam kelas? Perpustakaan Huda Assyifa MAN Kota Magelang punya banyak spot pojok baca luar ruangan loh!! .</p>
+                            <a href="https://www.instagram.com/p/DJTJmQxTSLk/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Baca Selengkapnya &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="images/berita4.png" alt="Gambar Berita 4">
+                        <div class="news-content">
+                            <h3>Perjanjian Kerja Sama dengan Perpustakaan UNIMMA</h3>
+                            <p>Perpustakaan Huda Assyifa MAN Kota Magelang melakukan kerjasama pengembangan perpustakaan. Hal ini merupakan salah satu upaya agar perpustakaan akan tetap eksis diera teknologi saat ini.</p>
+                            <a href="https://www.instagram.com/p/DJIsKjFTggI/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Baca Selengkapnya &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- NEW: FAQ Chat Button -->
+    <div class="faq-fab">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- NEW: FAQ Chat Window -->
+    <div class="faq-chat-window">
+        <div class="chat-header">
+            <h3>Butuh Bantuan?</h3>
+            <button class="chat-close">&times;</button>
+        </div>
+        <div class="chat-body">
+            <p>Halo! Ada yang bisa kami bantu? Silakan ajukan pertanyaan Anda melalui WhatsApp.</p>
+        </div>
+        <div class="chat-footer">
+            <!-- nomor WA-->
+            <a href="https://wa.me/6285166933110?text=Halo,%20saya%20butuh%20bantuan%20mengenai%20perpustakaan." target="_blank" class="wa-button">
+                <i class="fab fa-whatsapp"></i> Chat via WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- main Footer -->
+    <footer class="main-footer" style="background-color: var(--primary-color);">
+        <div class="footer-container">
+            <!-- Kolom Kiri: Peta -->
+            <div class="footer-column">
+            <h1>Lokasi</h1>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.322921259219!2d110.22936399999999!3d-7.429472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a8428bde0d3d1%3A0xde25ea9f4635bb84!2sMAN%20Kota%20Magelang!5e0!3m2!1sen!2sid!4v1753458541991!5m2!1sen!2sid"></iframe>
+                </div>
+            </div>
+
+            <!--  Kolom Tengah: Kata Penutup -->
+            <div class="footer-column">
+             
+                <p>PERPUSTAKAAN HUDA ASSYIFA MAN KOTA MAGELANG.</p>
+            </div>
+
+            <!-- Kolom Kanan: Media Sosial -->
+            <div class="footer-social-media column">
+                <h1>Ikuti kami di</h1>
+                <div class="social-media">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; Copyright 2025| Perpustakaan Huda Assyifa MAN Kota Magelang | Supported by 
+                    <a style="color: #ee0e0e;" href="https://www.instagram.com/dwiarifprayugo/" target="_blank" rel="noopener">Rriippx</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+ <!-- Modal for All Team Members -->
+ <div id="team-modal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2>Seluruh Tim Perpustakaan</h2>
+        <div class="all-team-grid">
+            <!-- Ganti dengan data staf Anda -->
+            <div class="team-member-card">
+                <img src="images/struktur.png" alt="Foto Staf" onerror="this.onerror=null;this.src='https://placehold.co/120x120/0D47A1/FFFFFF?text=Staf';">
+                <h3>Struktur Organisasi Perpustakaan Huda Assyifa 2025/2026</h3>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ADDED: HTML for Sirkulasi Popup -->
+<div id="Sirkulasi-popup" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close-btn">&times;</button>
+        <h3 id="popup-title">Judul Popup</h3>
+        <p id="popup-text">Konten akan dimuat di sini...</p>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', function () {
+            navLinks.classList.toggle('active');
+        });
+    
+        // --- FIXED: Dropdown Menu Logic for Mobile ---
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                if (window.getComputedStyle(menuToggle).display !== 'none') {
+                    e.preventDefault();
+                    const dropdown = this.parentElement;
+                    dropdown.classList.toggle('open');
+                }
+            });
+        });
+
+        // --- ADDED: Submenu Logic for Mobile ---
+        const submenuParents = document.querySelectorAll('.submenu-parent > a');
+        submenuParents.forEach(parentLink => {
+            parentLink.addEventListener('click', function(e) {
+                if (window.getComputedStyle(menuToggle).display !== 'none') {
+                    e.preventDefault();
+                    const submenuParent = this.parentElement;
+                    submenuParent.classList.toggle('open');
+                }
+            });
+        });
+
+
+        // --- JavaScript for Team Popup Modal ---
+        const viewTeamBtn = document.getElementById('view-team-btn');
+        const teamModal = document.getElementById('team-modal');
+        const closeModalBtn = document.querySelector('#team-modal .modal-close');
+
+        if (viewTeamBtn) {
+            viewTeamBtn.addEventListener('click', function (e) {
+                e.preventDefault(); 
+                teamModal.classList.add('active');
+            });
+        }
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', function () {
+                teamModal.classList.remove('active');
+            });
+        }
+
+        if (teamModal) {
+            teamModal.addEventListener('click', function (e) {
+                if (e.target === teamModal) {
+                    teamModal.classList.remove('active');
+                }
+            });
+        }
+
+        // --- NEW: Parallax Effect for Team Images ---
+        const teamSection = document.querySelector('.team-section');
+        if (teamSection) {
+            teamSection.addEventListener('mousemove', function(e) {
+                const parallaxImages = teamSection.querySelectorAll('.team-image-grid img[data-speed]');
+                const x = (window.innerWidth - e.pageX * 2) / 100;
+                const y = (window.innerHeight - e.pageY * 2) / 100;
+
+                parallaxImages.forEach(img => {
+                    const speed = img.getAttribute('data-speed');
+                    const x_movement = (speed * x);
+                    const y_movement = (speed * y);
+                    img.style.transform = `translateX(${x_movement}px) translateY(${y_movement}px)`;
+                });
+            });
+        }
+
+        // --- Carousel Logic ---
+        const newsCarousel = document.querySelector('.news-carousel');
+        if (newsCarousel) {
+            const newsGrid = newsCarousel.querySelector('.news-grid');
+            const newsCards = newsGrid.querySelectorAll('.news-card');
+            if (newsCards.length > 0) {
+                const cardWidth = newsCards[0].offsetWidth;
+                const gap = 30; // The margin-right value
+                let currentIndex = 0;
+                let intervalId;
+
+                newsCards.forEach(card => {
+                    const clone = card.cloneNode(true);
+                    newsGrid.appendChild(clone);
+                });
+
+                function startCarousel() {
+                    intervalId = setInterval(() => {
+                        currentIndex++;
+                        newsGrid.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
+
+                        if (currentIndex >= newsCards.length) {
+                            setTimeout(() => {
+                                newsGrid.style.transition = 'none';
+                                currentIndex = 0;
+                                newsGrid.style.transform = 'translateX(0)';
+                                setTimeout(() => {
+                                    newsGrid.style.transition = 'transform 0.5s ease-in-out';
+                                }, 50);
+                            }, 500);
+                        }
+                    }, 3000);
+                }
+
+                function stopCarousel() {
+                    clearInterval(intervalId);
+                }
+
+                newsCarousel.addEventListener('mouseenter', stopCarousel);
+                newsCarousel.addEventListener('mouseleave', startCarousel);
+
+                startCarousel();
+            }
+        }
+        
+        // --- Hero Slideshow Logic ---
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        if (heroSlides.length > 1) {
+            let currentSlide = 0;
+            setInterval(() => {
+                heroSlides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % heroSlides.length;
+                heroSlides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+         // --- FAQ Chat Logic ---
+        const faqFab = document.querySelector('.faq-fab');
+        const faqChatWindow = document.querySelector('.faq-chat-window');
+        const chatCloseBtn = document.querySelector('.chat-close');
+
+        if (faqFab && faqChatWindow && chatCloseBtn) {
+            faqFab.addEventListener('click', () => {
+                faqChatWindow.classList.toggle('active');
+            });
+
+            chatCloseBtn.addEventListener('click', () => {
+                faqChatWindow.classList.remove('active');
+            });
+        }
+
+        // --- Announcement Banner Logic ---
+        const announcementBanner = document.getElementById('announcement-banner');
+        const bannerCloseBtn = document.getElementById('banner-close');
+
+        if (announcementBanner && bannerCloseBtn) {
+            setTimeout(() => {
+                announcementBanner.classList.add('active');
+            }, 1000);
+
+            bannerCloseBtn.addEventListener('click', () => {
+                announcementBanner.classList.remove('active');
+            });
+
+            announcementBanner.addEventListener('click', (e) => {
+                if (e.target === announcementBanner) {
+                    announcementBanner.classList.remove('active');
+                }
+            });
+        }
+        
+        // --- FIXED: Sirkulasi Popup Logic ---
+        const sirkulasiPopup = document.getElementById('Sirkulasi-popup');
+        // Only run if the popup element exists
+        if (sirkulasiPopup) {
+            const popupTitle = document.getElementById('popup-title');
+            const popupText = document.getElementById('popup-text');
+            const popupLinks = document.querySelectorAll('a[data-popup]');
+            const popupCloseBtn = sirkulasiPopup.querySelector('.modal-close-btn');
+
+            const popupContent = {
+                'Baca di Tempat': {
+                    title: 'Layanan Baca di Tempat',
+                    text: 'Layanan ini memungkinkan Anda untuk membaca koleksi perpustakaan di area yang telah disediakan. Perpustakaan Huda Assyifa memiliki beberapa spot baca, yaitu: <br> 1. spot lesehan perpustakaan utama <br> 2. spot meja baca perpustakaan utama <br> 3. Spot baca perpustakaan digital di perpustakaan 2 <br> 4. 3 spot pojok baca luar ruangan (depan aula, samping ruang BK, dan bawah tangga utara masjid) <br> 5. area baca perpustakaan masjid <br><br> catatan: <br> 1. harap lakukan prosedur peminjaman jika ingin membawa buku dari perpustakaan utama ke area pojok baca luar ruangan <br> 2. harap hubungi petugas perpustakaan jika ingin membaca buku yang tersedia di rak buku pojok baca luar ruangan '
+                },
+                'Peminjaman & Pengembalian': {
+                    title: 'ALUR KUNJUNGAN, PEMINJAMAN DAN PENGEMBALIAN BUKU',
+                    text: '<br><br><img src="images/alur.png" alt="Deskripsi gambar">'
+                },
+                'Bebas Pustaka': {
+                    title: 'Prosedur Layanan Bebas Pustaka',
+                    
+                    text: 'Layanan Bebas Pustaka diperuntukan untuk anggota perpustakaan yang telah lulus atau pindah dari MAN Kota Magelang. <br> Syarat penerbitan surat bebas pustaka: <br> 1. Membawa kartu anggota perpustakaan <br> 2. Pastikan tidak ada pinjaman buku yang belum dikembalikan <br> 3. jika ada buku yang belum dikembalikan harap lapor ke petugas perpustakaan <br> 4. Membayar denda keterlambatan atau penggantian buku jika menghilangkan buku. <br> 5. jika telah memenuhi semua persyaratan Surat Bebas Pustaka siap di terbitkan. <br><br> catatan: Layanan Bebas Pustaka dan pengecekan tunggakan buku yang belum dikembalikan dapat melalui admin via whatsapp '
+                }
+            };
+
+            popupLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const popupId = link.getAttribute('data-popup');
+                    const content = popupContent[popupId];
+                    
+                    if (content && popupTitle && popupText) {
+                        popupTitle.textContent = content.title;
+                        popupText.innerHTML = content.text
+                        sirkulasiPopup.classList.add('active');
+                    }
+                });
+            });
+
+            if (popupCloseBtn) {
+                popupCloseBtn.addEventListener('click', () => {
+                    sirkulasiPopup.classList.remove('active');
+                });
+            }
+
+            sirkulasiPopup.addEventListener('click', (e) => {
+                if (e.target === sirkulasiPopup) {
+                    sirkulasiPopup.classList.remove('active');
+                }
+            });
+        }
+
+        // --- ADDED: Elegant Scroll Animation ---
+        const animatedElements = document.querySelectorAll('.scroll-animate');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        });
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+                // --- NEW: Stat Counter Animation Logic ---
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.5 // Trigger when 50% of the section is visible
+            });
+            observer.observe(statsSection);
+        }
+
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-count');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = timestamp - startTimestamp;
+                    const currentCount = Math.min(Math.floor(progress / duration * target), target);
+                    counter.textContent = currentCount.toLocaleString('id-ID'); // Use toLocaleString for number formatting
+                    if (progress < duration) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            });
+        }
+    });
+</script>
+</body>
+</html>
